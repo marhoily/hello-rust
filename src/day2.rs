@@ -1,6 +1,7 @@
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
 use std::{error::Error, str::FromStr};
+use crate::code_advent::{Problem, Solvable};
 
 #[derive(Debug, Clone, Copy)]
 struct Round {
@@ -67,10 +68,15 @@ impl Move {
 }
 #[derive(Debug)]
 pub struct Input(Vec<Round>);
-impl Input {
-    pub fn solve(&self) -> Result<u32, Box<dyn Error>> {
+impl Solvable for Input {
+    fn solve(&self) -> Result<u32, Box<dyn Error>> {
         Ok(self.0.iter().map(|r| r.score() as u32).sum())
     }
+}
+pub struct Day2();
+impl Problem for Day2 {
+    type Input = Input;
+    const DAY : u8 = 2; 
 }
 
 impl FromStr for Input {
