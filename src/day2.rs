@@ -1,9 +1,9 @@
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
 use std::{error::Error, str::FromStr};
-use crate::code_advent::Solution;
+use crate::code_advent::Problem;
 
-pub struct Problem();
+pub struct Subject();
 
 #[derive(Debug)]
 pub struct Input(Vec<Round>);
@@ -27,7 +27,7 @@ enum Outcome {
     Draw = 0,
 }
 
-impl Solution for Problem {
+impl Problem for Subject {
     type Input = Input;
     const DAY : u8 = 2;
 

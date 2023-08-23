@@ -1,13 +1,13 @@
 use std::{error::Error, str::FromStr};
 use reqwest::header::COOKIE;
 
-pub trait Solution {
+pub trait Problem {
     type Input : FromStr<Err = String>;
     const DAY : u8;
     fn solve(input: Self::Input) -> Result<u32, Box<dyn Error>>;
 }
 
-pub fn solve<P:Solution>() -> Result<u32, Box<dyn Error>> {
+pub fn solve<P:Problem>() -> Result<u32, Box<dyn Error>> {
     let resp = reqwest::blocking::Client::builder()
         .cookie_store(true)
         .build()?
