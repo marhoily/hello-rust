@@ -1,6 +1,6 @@
 use reqwest::header::COOKIE;
 use std::error::Error;
-mod problem2;
+mod day2;
 fn main() -> Result<(), Box<dyn Error>> {
     let resp = reqwest::blocking::Client::builder()
         .cookie_store(true)
@@ -10,7 +10,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .send()?;
 
     let result = if resp.status().is_success() {
-        resp.text()?.parse::<problem2::Input>()?.solve()
+        resp.text()?.parse::<day2::Input>()?.solve()
     } else {
         let err = resp.text()?;
         Err(err.into())
