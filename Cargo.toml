@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 reqwest = { features = ["blocking", "cookies"] }
+num-traits = "0.2"
+num-derive = "0.4"
