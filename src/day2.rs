@@ -1,7 +1,7 @@
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
 use std::{error::Error, str::FromStr};
-use crate::code_advent::{Problem, Solvable};
+use crate::code_advent::Problem;
 
 #[derive(Debug, Clone, Copy)]
 struct Round {
@@ -68,15 +68,15 @@ impl Move {
 }
 #[derive(Debug)]
 pub struct Input(Vec<Round>);
-impl Solvable for Input {
-    fn solve(&self) -> Result<u32, Box<dyn Error>> {
-        Ok(self.0.iter().map(|r| r.score() as u32).sum())
-    }
-}
+
 pub struct Day2();
 impl Problem for Day2 {
     type Input = Input;
-    const DAY : u8 = 2; 
+    const DAY : u8 = 2;
+
+    fn solve(input: Self::Input) -> Result<u32, Box<dyn Error>> {
+        Ok(input.0.iter().map(|r| r.score() as u32).sum())
+    }
 }
 
 impl FromStr for Input {
@@ -95,14 +95,13 @@ impl FromStr for Round {
     type Err = &'static str;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let x = line
-            .chars()
+        let chars = &mut line.chars();
+        let x = chars
             .nth(0)
             .map_or(None, Move::parse)
             .ok_or("first value in line is not found")?;
-        let y = line
-            .chars()
-            .nth(2)
+        let y = chars
+            .nth(1)
             .map_or(None, Outcome::parse)
             .ok_or("second value in line is not found")?;
         Ok(Round {
