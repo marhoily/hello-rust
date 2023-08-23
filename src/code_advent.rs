@@ -12,7 +12,7 @@ pub fn solve<P: Problem>() -> Result<u32, Box<dyn Error>> {
 }
 fn download(day: u8) -> Result<String, Box<dyn Error>> {
     let mut path = env::temp_dir();
-    path.set_file_name(format!("code_advent_day_{:?}.txt", day));
+    path.push(format!("code_advent_day_{:?}.txt", day));
     let path = path.as_path();
 
     if let Err(_) = fs::metadata(path) {
